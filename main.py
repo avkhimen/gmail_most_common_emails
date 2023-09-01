@@ -1,4 +1,4 @@
-from .env import API_KEY
+from creds import API_KEY
 
 def main():
     pass
