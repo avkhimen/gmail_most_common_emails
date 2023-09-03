@@ -1,12 +1,16 @@
 from __future__ import print_function
 
 import os.path
+import pickle
+from tqdm import tqdm
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+
+from utils import increment_sender
 
 def main():
 
@@ -36,6 +40,7 @@ def main():
     # Initialize variables for pagination
     page_token = None
     messages = []
+    sender_count = {}
 
         # Loop through pages of message metadata
     while True:
@@ -48,24 +53,22 @@ def main():
     try:
 
         # Process each email
-        for message in messages:
+        for message in tqdm(messages):
             msg = service.users().messages().get(userId='me', id=message['id']).execute()
-            subject = ''
             sender = ''
 
             for header in msg['payload']['headers']:
-                if header['name'] == 'Subject':
-                    subject = header['value']
-                elif header['name'] == 'From':
+                if header['name'] == 'From':
                     sender = header['value']
 
-            print(f"Subject: {subject}")
-            print(f"Sender: {sender}")
-            print("-----")
+            sender = increment_sender(sender_count, sender)
 
     except HttpError as error:
             # TODO(developer) - Handle errors from gmail API.
             print(f'An error occurred: {error}')
+
+    with open('sender_count.pkl', 'wb') as f:
+        pickle.dump(f, sender_count)
 
 if __name__ == '__main__':
     main()
