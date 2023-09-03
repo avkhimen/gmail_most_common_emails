@@ -12,9 +12,10 @@ def sort_dict_by_values(dictionary):
     df = pd.DataFrame(dictionary.items(), columns=['Key', 'Value'])
     
     # Sort the DataFrame by 'Value' column in descending order
-    sorted_df = df.sort_values(by='Value', ascending=False)
+    sorted_df = df.sort_values(by='Value', ascending=False).reset_index()
     
     # Get the sorted keys from the index
-    sorted_keys = sorted_df['Key'].tolist()
+    senders = sorted_df['Key'].tolist()
+    counts = sorted_df['Value'].tolist()
     
-    return sorted_keys
+    return dict(zip(senders, counts))

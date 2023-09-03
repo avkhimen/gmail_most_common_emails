@@ -49,9 +49,11 @@ def main():
         page_token = results.get('nextPageToken')
         if not page_token:
             break
+    
+    n = 10
+    messages = messages[:n]
 
     try:
-
         # Process each email
         for message in tqdm(messages):
             msg = service.users().messages().get(userId='me', id=message['id']).execute()

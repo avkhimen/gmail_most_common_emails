@@ -7,3 +7,5 @@ Tested on python 3.11.
 
 1. Run setup first with `$ sh setup.sh`
 2. Run script with `$ python main.py`
+
+The resulting dict `sender_count` contains the senders and their counts.
