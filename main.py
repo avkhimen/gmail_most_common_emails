@@ -71,7 +71,7 @@ def main():
     sender_count = sort_dict_by_values(sender_count)
 
     with open('sender_count.pkl', 'wb') as f:
-        pickle.dump(f, sender_count)
+        pickle.dump(sender_count, f)
 
 if __name__ == '__main__':
     main()
