@@ -67,6 +67,8 @@ def main():
             # TODO(developer) - Handle errors from gmail API.
             print(f'An error occurred: {error}')
 
+    # Sort senders by most occurring emails
+
     with open('sender_count.pkl', 'wb') as f:
         pickle.dump(f, sender_count)
 
