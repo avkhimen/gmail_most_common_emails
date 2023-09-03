@@ -51,19 +51,6 @@ def main():
         # TODO(developer) - Handle errors from gmail API.
         print(f'An error occurred: {error}')
 
-    print('Listing messages now')
-
-    try:
-        # Call the Gmail API
-        service = build('gmail', 'v1', credentials=creds)
-        results = service.users().messages().list(userId='me').execute()
-        mgs = results.get('messages', [])
-        print(mgs)
-
-    except HttpError as error:
-        # TODO(developer) - Handle errors from gmail API.
-        print(f'An error occurred: {error}')
-
 
 if __name__ == '__main__':
     main()
