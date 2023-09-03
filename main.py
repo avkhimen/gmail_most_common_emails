@@ -10,7 +10,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from utils import increment_sender
+from utils import increment_sender, sort_dict_by_values
 
 def main():
 
@@ -68,6 +68,7 @@ def main():
             print(f'An error occurred: {error}')
 
     # Sort senders by most occurring emails
+    sender_count = sort_dict_by_values(sender_count)
 
     with open('sender_count.pkl', 'wb') as f:
         pickle.dump(f, sender_count)
