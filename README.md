@@ -5,6 +5,8 @@ Tested on python 3.11.
 
 ## To run:
 
+Make sure you have the `creadentials.json` file (follow this explanation - https://developers.google.com/gmail/api/quickstart/python).
+
 1. Run setup first with `$ sh setup.sh`
 2. Run script with `$ python main.py`
 
